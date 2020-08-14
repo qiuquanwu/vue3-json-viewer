@@ -1,0 +1,35 @@
+{
+  "name": "vue3-plugin-cli",
+  "version": "1.0.0",
+  "description": "a plugin develop tool for vue3,bundle to esm",
+  "main": "dist/bundle.esm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/plugin-syntax-jsx": "^7.10.4",
+    "@babel/preset-env": "^7.11.0",
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@vue/compiler-sfc": "^3.0.0-rc.5",
+    "clean-css": "^4.2.3",
+    "rollup": "^2.23.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-css-only": "^2.1.0",
+    "rollup-plugin-jsx": "^1.0.3",
+    "rollup-plugin-styles": "^3.10.0",
+    "rollup-plugin-stylus-css-modules": "^1.5.0",
+    "rollup-plugin-unassert": "^0.3.0",
+    "rollup-plugin-vue": "^6.0.0-beta.10",
+    "stylus": "^0.54.8",
+    "vue": "^3.0.0-rc.5"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0-rc.5"
+  }
+}
