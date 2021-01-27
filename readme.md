@@ -1,8 +1,8 @@
 # vue3-json-viewer
 简单易用的json内容展示组件,适配vue3和vite。
-在使用vue3+vite开发时，发现需要用到vue显示json数据，发现vue-json-viewer只能兼容vue2，于是花了一个小时，重写的vue3的适配。
+在使用vue3+vite开发时，发现需要用到显示json数据组件，发现vue-json-viewer只能兼容vue2，于是花了一个小时，重写的vue3的适配。
 原作者：[github](https://github.com/chenfengjw163/vue-json-viewer)
- ## Installing
+ ## 安装
 需要依赖clipboard，先安装clipboard
 ```
 $ npm install clipboard --save
@@ -12,7 +12,7 @@ $ npm install clipboard --save
 $ npm install vue3-json-viewer --save
 ```
 
-## Example
+## 使用
 mian.js
 ```js
 import { createApp } from 'vue'
