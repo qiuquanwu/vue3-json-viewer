@@ -201,7 +201,6 @@ var script$4 = {
             }, 0);
         },
         toggle: function toggle() {
-            console.log(123);
             this.$emit('update:expand', !this.expand);
             this.dispatchEvent();
         },
@@ -316,7 +315,6 @@ var script$5 = {
             }, 0);
         },
         toggle: function toggle() {
-            console.log(789);
             this.$emit('update:expand', !this.expand);
             try {
                 this.$el.dispatchEvent(new Event('resized'));

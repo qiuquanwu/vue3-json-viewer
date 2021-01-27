@@ -46,7 +46,6 @@ export default {
       }, 0);
     },
     toggle() {
-      console.log(789)
       this.$emit('update:expand', !this.expand)
 
       try {

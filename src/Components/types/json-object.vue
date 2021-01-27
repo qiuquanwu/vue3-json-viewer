@@ -53,7 +53,6 @@ export default {
       }, 0);
     },
     toggle() {
-      console.log(123)
       this.$emit('update:expand', !this.expand)
       this.dispatchEvent();
     },
