@@ -1,9 +1,9 @@
-import cButton from './Components/button/button.vue'
+import JsonViewer from './Components/json-viewer.vue'
 export {
-    cButton
+    JsonViewer
 }
 const install=(app)=>{
-    app.component(cButton.name,cButton )
+    app.component(JsonViewer.name,JsonViewer )
 }
 
 export default {

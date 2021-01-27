@@ -1,14 +1,20 @@
 {
-  "name": "vue3-plugin-cli",
-  "version": "1.0.0",
-  "description": "a plugin develop tool for vue3,bundle to esm",
-  "main": "dist/bundle.esm.js",
+  "name": "vue3-json-viewer",
+  "version": "1.0.2",
+  "description": "vuejs展示json的组件,适配vue3",
+  "main": "dist/bundle.cjs.js",
+  "module": "dist/bundle.esm.js",
+  "files": ["dist"],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "vue",
+    "json",
+    "vue-next",
+    "vue3"
+  ],
+  "author": "qiuquanwu <“919403255@qq.com>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.11.1",
@@ -30,6 +36,21 @@
     "vue": "^3.0.0-rc.5"
   },
   "peerDependencies": {
-    "vue": "^3.0.0-rc.5"
-  }
+    "vue": "^3.0.0-rc.5",
+    "clipboard": "^2.0.6"
+  },
+  "contributors": [
+    {
+      "name": "陈峰",
+      "email": "chenfengjw@hotmail.com"
+    },
+    {
+      "name": "Sacha Stafyniak",
+      "email": "sacha.stafyniak@gmail.com"
+    },
+    {
+      "name": "邱权武",
+      "email": "9194032@qq.com"
+    }
+  ]
 }

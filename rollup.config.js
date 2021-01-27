@@ -6,7 +6,7 @@ import commonjs from "@rollup/plugin-commonjs"
 import css from 'rollup-plugin-css-only' // 提取css，压缩能力不行
 import CleanCSS from 'clean-css' // 压缩css
 import { writeFileSync } from 'fs' // 写文件
-const extensions = [".ts", ".tsx", ".js"];
+const extensions = [".js"];
 
 
 export default {
@@ -18,6 +18,7 @@ export default {
     },
     external:["vue","@vue/compiler-sfc"],
     plugins:[
+        VuePlugin({ css: true }),
         nodeResolve({
             extensions,
             modulesOnly: true,
@@ -32,10 +33,9 @@ export default {
 
           css({ output(style) {
             // 压缩 css 写入 dist/vue-rollup-component-template.css
-            writeFileSync('./dist/cube-ui-min.css', new CleanCSS().minify(style).styles)
+            writeFileSync('./dist/index.css', new CleanCSS().minify(style).styles)
           } }),
-          // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式
-          VuePlugin({ css: false }),         
+          // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式       
           unassert(),
           
     ],
