@@ -31,7 +31,6 @@ App.vue
 
 <script setup>
 import { reactive, ref } from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
 let obj = {
   name: "qiu",//字符串
   age: 18,//数组
