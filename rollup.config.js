@@ -6,6 +6,7 @@ import commonjs from "@rollup/plugin-commonjs"
 import css from 'rollup-plugin-css-only' // 提取css，压缩能力不行
 import CleanCSS from 'clean-css' // 压缩css
 import { writeFileSync } from 'fs' // 写文件
+import { terser } from 'rollup-plugin-terser'
 const extensions = [".js"];
 
 
@@ -37,7 +38,7 @@ export default {
           } }),
           // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式       
           unassert(),
-          
+          terser()
     ],
     treeshake: {
         moduleSideEffects: false,
