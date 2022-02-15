@@ -1,19 +1,29 @@
 # vue3-json-viewer
-简单易用的json内容展示组件,适配vue3和vite。
-在使用vue3+vite开发时，发现需要用到显示json数据组件，发现vue-json-viewer只能兼容vue2，于是花了一个小时，重写的vue3的适配。
-原作者：[github](https://github.com/chenfengjw163/vue-json-viewer)
- ## 安装
-需要依赖clipboard，先安装clipboard
+
+[中文版](readme_cn.md)
+
+Simple and easy-to-use json content display component suitable for `vue3` and `vite`.
+When developing with `vue3`+`vite`, I found that I needed to use the display json data component, and found that `vue-json-viewer` can only be compatible with `vue2`, so it took an hour to rewrite the adaptation of `vue3`.
+Original author: [github](https://github.com/chenfengjw163/vue-json-viewer)
+
+## Install
+
+Requires `clipboard`
+
 ```
 $ npm install clipboard --save
 ```
-再安装vue3-json-viewer
+
+Then install `vue3-json-viewer`
+
 ```
 $ npm install vue3-json-viewer --save
 ```
 
-## 使用
-mian.js
+## Usage
+
+main.js
+
 ```js
 import { createApp } from "vue";
 import App from "./App.vue";
@@ -22,9 +32,10 @@ import "vue3-json-viewer/dist/index.css";
 const app = createApp(App);
 app.use(JsonViewer);
 app.mount("#app");
-
 ```
+
 App.vue
+
 ``` html
 <template>
   <json-viewer :value="jsonData" copyable boxed sort />
@@ -33,19 +44,15 @@ App.vue
 <script setup>
 import { reactive, ref } from "vue";
 let obj = {
-  name: "qiu",//字符串
-  age: 18,//数组
-  isMan:false,//布尔值
-  date:new Date(),
-  fn:()=>{},
-  arr:[1,2,5]
+  name: "qiu",
+  age: 18,
+  isMan: false,
+  date: new Date(),
+  fn: () => {},
+  arr: [1, 2, 5]
 };
 const jsonData = reactive(obj);
-const strData = ref("http://www.baidu.com");
 </script>
-
-<style></style>
-
 ```
 
 ![](./img/demo.png)
