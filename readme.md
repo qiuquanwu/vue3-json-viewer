@@ -25,13 +25,13 @@ $ npm install vue3-json-viewer --save
 main.js
 
 ```js
-import { createApp } from 'vue'
-import App from './App.vue'
-import JsonViewer from "vue3-json-viewer"
-
-const app = createApp(App)
-app.use(JsonViewer)
-app.mount('#app')
+import { createApp } from "vue";
+import App from "./App.vue";
+import JsonViewer from "vue3-json-viewer";
+import "vue3-json-viewer/dist/index.css";
+const app = createApp(App);
+app.use(JsonViewer);
+app.mount("#app");
 ```
 
 App.vue

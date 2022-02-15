@@ -1,9 +1,10 @@
 {
   "name": "vue3-json-viewer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "vuejs展示json的组件,适配vue3",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
+  "style": "dist/index.css",
   "files": [
     "dist"
   ],
@@ -36,11 +37,11 @@
     "rollup-plugin-unassert": "^0.3.0",
     "rollup-plugin-vue": "^6.0.0-beta.10",
     "stylus": "^0.54.8",
-    "vue": "^3.0.0-rc.5"
+    "vue": "^3.2.30"
   },
   "peerDependencies": {
-    "vue": "^3.0.0-rc.5",
-    "clipboard": "^2.0.6"
+    "clipboard": "^2.0.6",
+    "vue": "^3.0.0-rc.5"
   },
   "contributors": [
     {
