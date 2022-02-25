@@ -7,40 +7,47 @@ import css from 'rollup-plugin-css-only' // 提取css，压缩能力不行
 import CleanCSS from 'clean-css' // 压缩css
 import { writeFileSync } from 'fs' // 写文件
 import { terser } from 'rollup-plugin-terser'
+import pkg from './package.json'
 const extensions = [".js"];
 
 
 export default {
-    input:'./src/index.js',
-    output:{
-        file:'./dist/bundle.esm.js',
-        format:'esm', //若打包commonjs
-        assetFileNames: "[name]-[hash][extname]"
-    },
-    external:["vue","@vue/compiler-sfc","./index.css"],
-    plugins:[
-        VuePlugin({ css: true }),
-        nodeResolve({
-            extensions,
-            modulesOnly: true,
-          }),
-        babel({
-            exclude: "node_modules/**",
-            extensions,
-            runtimeHelpers: true,
-          }),
-         
-          commonjs(),
+  input: './src/index.js',
+  // output: {
+  //   file: './dist/bundle.esm.js',
+  //   format: 'esm', //若打包commonjs
+  //   assetFileNames: "[name]-[hash][extname]"
+  // },
+  output: [
+    { file: pkg.main, format: 'cjs' },
+    { file: pkg.module, format: 'es' }
+  ],
+  external: ["vue", "@vue/compiler-sfc", "./index.css"],
+  plugins: [
+    VuePlugin({ css: true }),
+    nodeResolve({
+      extensions,
+      modulesOnly: true,
+    }),
+    babel({
+      exclude: "node_modules/**",
+      extensions,
+      runtimeHelpers: true,
+    }),
 
-          css({ output(style) {
-            // 压缩 css 写入 dist/vue-rollup-component-template.css
-            writeFileSync('./dist/index.css', new CleanCSS().minify(style).styles)
-          } }),
-          // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式       
-          unassert(),
-          // terser()
-    ],
-    treeshake: {
-        moduleSideEffects: false,
+    commonjs(),
+
+    css({
+      output(style) {
+        // 压缩 css 写入 dist/vue-rollup-component-template.css
+        writeFileSync('./dist/index.css', new CleanCSS().minify(style).styles)
       }
+    }),
+    // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式       
+    unassert(),
+    terser()
+  ],
+  treeshake: {
+    moduleSideEffects: false,
+  }
 }
