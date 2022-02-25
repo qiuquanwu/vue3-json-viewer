@@ -40,8 +40,11 @@
     "vue": "^3.2.30"
   },
   "peerDependencies": {
-    "clipboard": "^2.0.6",
     "vue": "^3.0.0-rc.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qiuquanwu/vue3-json-viewer"
   },
   "contributors": [
     {
@@ -56,5 +59,8 @@
       "name": "邱权武",
       "email": "9194032@qq.com"
     }
-  ]
+  ],
+  "dependencies": {
+    "@migrate-to-esm/clipboard": "^2.0.6-1"
+  }
 }

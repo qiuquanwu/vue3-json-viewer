@@ -7,5 +7,5 @@ const install=(app)=>{
 }
 
 export default {
-    install
+    install,
 }

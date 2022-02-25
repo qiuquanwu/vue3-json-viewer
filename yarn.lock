@@ -920,6 +920,37 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@migrate-to-esm/clipboard@^2.0.6-1":
+  version "2.0.6-1"
+  resolved "https://registry.npmjs.org/@migrate-to-esm/clipboard/-/clipboard-2.0.6-1.tgz#7f24f9d2a504549a7168b256be286bbbb792ba9d"
+  integrity sha512-WZz0P4g80WgbZsGZD660qSmxP1QXo4Ynaw2uelBm7shObDZI1MDGFz/t7wAKoNUXdo4VILez1hDeWE3Qui+DHg==
+  dependencies:
+    "@migrate-to-esm/good-listener" "^1.2.2"
+    "@migrate-to-esm/select" "^1.1.2"
+    "@migrate-to-esm/tiny-emitter" "^2.0.2"
+
+"@migrate-to-esm/delegate@^3.1.2":
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/@migrate-to-esm/delegate/-/delegate-3.2.0.tgz#009aa892fc53e3e6c193bb597912371504111cd7"
+  integrity sha512-+zwJ87lRr64/JUYeoUp9vtqxzJjvQdRR/X2p9XgZbNvcB906CxWq67vSnk+zYv1bqKWHcrsj6fzdAP5mbnsQSg==
+
+"@migrate-to-esm/good-listener@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/@migrate-to-esm/good-listener/-/good-listener-1.2.2.tgz#85c5f50449c7780b91106f1d538639d3a5cea08e"
+  integrity sha512-DEv089YhCkRBb6kB2NGLO7ErmMsekliPf/8eKACE2eStjz7rMDdXnmaj8yMzrdT2vvrX2A0IX3bhAQgaY3mymQ==
+  dependencies:
+    "@migrate-to-esm/delegate" "^3.1.2"
+
+"@migrate-to-esm/select@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/@migrate-to-esm/select/-/select-1.1.2.tgz#7352fdf0c4a0dab10714c1a2a6c62e39f7f3651a"
+  integrity sha512-nkHn0JIq4/SbgwUzXZvYC5F1ePjbQns3irWsQcDX34UVw9XnbcALQr0/Ygjcnb9YlPhsO5++Xd1i6cfEzOwQFg==
+
+"@migrate-to-esm/tiny-emitter@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/@migrate-to-esm/tiny-emitter/-/tiny-emitter-2.0.2.tgz#949596cf7fc8ed3e74c3538b9bc6e7a8eb02bd35"
+  integrity sha512-4RHPzP7HEN9zhFRYwEFZYCbNavpOy5k/xzU6BbUTmz3xnfrOvd9rr4McCRO0o8vgSKrFI6s31IYfjfn2r8STbg==
+
 "@rollup/plugin-commonjs@^14.0.0":
   version "14.0.0"
   resolved "https://registry.npmmirror.com/@rollup/plugin-commonjs/-/plugin-commonjs-14.0.0.tgz#4285f9ec2db686a31129e5a2b415c94aa1f836f0"

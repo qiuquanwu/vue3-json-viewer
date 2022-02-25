@@ -17,7 +17,7 @@ export default {
         format:'esm', //若打包commonjs
         assetFileNames: "[name]-[hash][extname]"
     },
-    external:["vue","@vue/compiler-sfc"],
+    external:["vue","@vue/compiler-sfc","./index.css"],
     plugins:[
         VuePlugin({ css: true }),
         nodeResolve({
@@ -38,7 +38,7 @@ export default {
           } }),
           // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式       
           unassert(),
-          terser()
+          // terser()
     ],
     treeshake: {
         moduleSideEffects: false,
