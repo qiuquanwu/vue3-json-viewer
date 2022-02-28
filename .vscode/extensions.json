@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dsznajder.es7-react-js-snippets",
+    "burkeholland.simple-react-snippets",
+    "dbaeumer.vscode-eslint",
+    "equinusocio.vsc-community-material-theme",
+    "pkief.material-icon-theme",
+    "juanmnl.vscode-theme-1984"
+  ]
+}

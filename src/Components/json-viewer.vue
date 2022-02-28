@@ -1,173 +1,149 @@
 <template>
   <div :class="jvClass">
-    <div 
-      v-if="copyable"
-      :class="`jv-tooltip ${copyText.align || 'right'}`"
-    >
-      <span  
-        ref="clip" 
-        class="jv-button"
-        :class="{copied}"
-      >
-        <slot
-          name="copy"
-          :copied="copied"
-        >
+    <div v-if="copyable" :class="`jv-tooltip ${copyText.align || 'right'}`">
+      <span ref="clip" class="jv-button" :class="{ copied }">
+        <slot name="copy" :copied="copied">
           {{ copied ? copyText.copiedText : copyText.copyText }}
         </slot>
       </span>
     </div>
-    <div 
-      class="jv-code" 
-      :class="{'open': expandCode, boxed}"
-    >
-      <json-box
-        ref="jsonBox"
-        :value="value"
-        :sort="sort"
-        :preview-mode="previewMode"
-      />
+    <div class="jv-code" :class="{ open: expandCode, boxed }">
+      <json-box ref="jsonBox" :value="value" :sort="sort" :preview-mode="previewMode" />
     </div>
-    <div 
-      v-if="expandableCode && boxed" 
-      class="jv-more" 
-      @click="toggleExpandCode"
-    >
-      <span 
-        class="jv-toggle" 
-        :class="{open: !!expandCode}"
-      />
+    <div v-if="expandableCode && boxed" class="jv-more" @click="toggleExpandCode">
+      <span class="jv-toggle" :class="{ open: !!expandCode }" />
     </div>
   </div>
 </template>
 
 <script>
-import JsonBox from './json-box.vue'
-import Clipboard from 'clipboard'
-import {debounce} from './utils.js';
+import JsonBox from "./json-box.vue";
+import Clipboard from "clipboard";
+import { debounce } from "./utils.js";
 
 export default {
-  name: 'JsonViewer',
+  name: "JsonViewer",
   components: {
-    JsonBox
+    JsonBox,
   },
   props: {
     value: {
       type: [Object, Array, String, Number, Boolean, Function],
-      required: true
+      required: true,
     },
     expanded: {
       type: Boolean,
-      default: false
+      default: false,
     },
     expandDepth: {
       type: Number,
-      default: 1
+      default: 1,
     },
     copyable: {
       type: [Boolean, Object],
-      default: false
+      default: false,
     },
     sort: {
       type: Boolean,
-      default: false
+      default: false,
     },
     boxed: {
       type: Boolean,
-      default: false
+      default: false,
     },
     theme: {
       type: String,
-      default: 'jv-light'
+      default: "jv-light",
     },
     timeformat: {
       type: Function,
-      default: value => value.toLocaleString(),
+      default: (value) => value.toLocaleString(),
     },
     previewMode: {
       type: Boolean,
       default: false,
-    }
+    },
   },
-  provide () {
+  provide() {
     return {
       expandDepth: this.expandDepth,
       timeformat: this.timeformat,
-    }
+    };
   },
-  data () {
+  data() {
     return {
       copied: false,
       expandableCode: false,
-      expandCode: this.expanded
-    }
+      expandCode: this.expanded,
+    };
   },
   computed: {
     jvClass() {
-      return 'jv-container ' + this.theme + (this.boxed ? ' boxed' : '')
+      console.log("theme", this.$props);
+      return "jv-container " + this.theme + (this.boxed ? " boxed" : "");
     },
     copyText() {
-      const { copyText, copiedText, timeout, align } = this.copyable
+      const { copyText, copiedText, timeout, align } = this.copyable;
 
       return {
-        copyText: copyText || 'copy',
-        copiedText: copiedText || 'copied!',
+        copyText: copyText || "copy",
+        copiedText: copiedText || "copied!",
         timeout: timeout || 2000,
         align,
-      }
-    }
+      };
+    },
   },
   watch: {
     value() {
-      this.onResized()
-    }
+      this.onResized();
+    },
   },
   mounted: function () {
     this.debounceResized = debounce(this.debResized.bind(this), 200);
     if (this.boxed && this.$refs.jsonBox) {
-      this.onResized()
-      this.$refs.jsonBox.$el.addEventListener("resized", this.onResized, true)
+      this.onResized();
+      this.$refs.jsonBox.$el.addEventListener("resized", this.onResized, true);
     }
     if (this.copyable) {
       const clipBoard = new Clipboard(this.$refs.clip, {
         text: () => {
-          return JSON.stringify(this.value, null, 2)
-        }
+          return JSON.stringify(this.value, null, 2);
+        },
       });
-      clipBoard.on('success', (e) => {
-        this.onCopied(e)
-      })
+      clipBoard.on("success", (e) => {
+        this.onCopied(e);
+      });
     }
   },
   methods: {
-    onResized () {
+    onResized() {
       this.debounceResized();
     },
     debResized() {
       this.$nextTick(() => {
         if (!this.$refs.jsonBox) return;
         if (this.$refs.jsonBox.$el.clientHeight >= 250) {
-          this.expandableCode = true
+          this.expandableCode = true;
         } else {
-          this.expandableCode = false
+          this.expandableCode = false;
         }
-      })
+      });
     },
     onCopied(copyEvent) {
       if (this.copied) {
         return;
       }
-      this.copied = true
+      this.copied = true;
       setTimeout(() => {
-        this.copied = false
-      }, this.copyText.timeout)
-      this.$emit('copied', copyEvent)
+        this.copied = false;
+      }, this.copyText.timeout);
+      this.$emit("copied", copyEvent);
     },
-    toggleExpandCode () {
-      this.expandCode = !this.expandCode
-    }
-  }
-}
+    toggleExpandCode() {
+      this.expandCode = !this.expandCode;
+    },
+  },
+};
 </script>
 
 <style>
@@ -191,7 +167,27 @@ export default {
   font-size: 14px;
   font-family: Consolas, Menlo, Courier, monospace;
 }
+.jv-container.jv-dark {
+  background: #282c34;
+  white-space: nowrap;
+  color: #fff;
+  font-size: 14px;
+  font-family: Consolas, Menlo, Courier, monospace;
+}
 .jv-container.jv-light .jv-ellipsis {
+  color: #999;
+  background-color: #eee;
+  display: inline-block;
+  line-height: 0.9;
+  font-size: 0.9em;
+  padding: 0px 4px 2px 4px;
+  margin: 0 4px;
+  border-radius: 3px;
+  vertical-align: 2px;
+  cursor: pointer;
+  user-select: none;
+}
+.jv-container.jv-dark .jv-ellipsis {
   color: #999;
   background-color: #eee;
   display: inline-block;
@@ -207,10 +203,56 @@ export default {
 .jv-container.jv-light .jv-button {
   color: #49b3ff;
 }
+.jv-container.jv-dark .jv-button {
+  color: #49b3ff;
+}
 .jv-container.jv-light .jv-key {
   color: #111111;
   margin-right: 4px;
 }
+.jv-container.jv-dark .jv-key {
+  color: #fff;
+  margin-right: 4px;
+}
+
+/**dark */
+.jv-container.jv-dark .jv-item.jv-array {
+  color: #111111;
+}
+.jv-container.jv-dark .jv-item.jv-array {
+  color: #fff;
+}
+.jv-container.jv-dark .jv-item.jv-boolean {
+  color: #fc1e70;
+}
+.jv-container.jv-dark .jv-item.jv-function {
+  color: #067bca;
+}
+.jv-container.jv-dark .jv-item.jv-number {
+  color: #fc1e70;
+}
+.jv-container.jv-dark .jv-item.jv-object {
+  color: #fff;
+}
+.jv-container.jv-dark .jv-item.jv-undefined {
+  color: #e08331;
+}
+.jv-container.jv-dark .jv-item.jv-string {
+  color: #42b983;
+  word-break: break-word;
+  white-space: normal;
+}
+.jv-container.jv-dark .jv-item.jv-string .jv-link {
+  color: #0366d6;
+}
+.jv-container.jv-dark .jv-code .jv-toggle:before {
+  padding: 0px 2px;
+  border-radius: 2px;
+}
+.jv-container.jv-dark .jv-code .jv-toggle:hover:before {
+  background: #eee;
+}
+/**light */
 .jv-container.jv-light .jv-item.jv-array {
   color: #111111;
 }
@@ -302,7 +344,11 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 1;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(230, 230, 230, 0.3) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(230, 230, 230, 0.3) 100%
+  );
   transition: all 0.1s;
 }
 .jv-container .jv-more:hover .jv-toggle {
@@ -310,7 +356,11 @@ export default {
   color: #111;
 }
 .jv-container .jv-more:hover:after {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(230, 230, 230, 0.3) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(230, 230, 230, 0.3) 100%
+  );
 }
 .jv-container .jv-button {
   position: relative;

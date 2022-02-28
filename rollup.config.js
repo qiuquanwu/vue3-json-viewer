@@ -8,10 +8,12 @@ import CleanCSS from 'clean-css' // 压缩css
 import { writeFileSync } from 'fs' // 写文件
 import { terser } from 'rollup-plugin-terser'
 import pkg from './package.json'
+// import svg from 'rollup-plugin-vue-inline-svg';
+import dts from "rollup-plugin-dts";
 const extensions = [".js"];
 
 
-export default {
+export default [{
   input: './src/index.js',
   // output: {
   //   file: './dist/bundle.esm.js',
@@ -24,11 +26,13 @@ export default {
   ],
   external: ["vue", "@vue/compiler-sfc", "./index.css"],
   plugins: [
-    VuePlugin({ css: true }),
+
     nodeResolve({
-      extensions,
-      modulesOnly: true,
+      browser: true,
+      extensions: ['.ts', '.mjs', '.js', '.json', '.node']
     }),
+
+    VuePlugin({ css: true }),
     babel({
       exclude: "node_modules/**",
       extensions,
@@ -45,9 +49,9 @@ export default {
     }),
     // css: false 将<style>块转换为导入语句，rollup-plugin-css-only可以提取.vue文件中的样式       
     unassert(),
-    terser()
+    // terser()
   ],
   treeshake: {
     moduleSideEffects: false,
   }
-}
+}]
