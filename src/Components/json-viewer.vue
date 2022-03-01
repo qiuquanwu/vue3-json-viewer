@@ -53,7 +53,7 @@ export default {
     },
     theme: {
       type: String,
-      default: "jv-light",
+      default: "light",
     },
     timeformat: {
       type: Function,
@@ -68,6 +68,7 @@ export default {
     return {
       expandDepth: this.expandDepth,
       timeformat: this.timeformat,
+      keyClick: this.keyClick,
     };
   },
   data() {
@@ -77,10 +78,10 @@ export default {
       expandCode: this.expanded,
     };
   },
+  emits: ["onKeyClick"],
   computed: {
     jvClass() {
-      console.log("theme", this.$props);
-      return "jv-container " + this.theme + (this.boxed ? " boxed" : "");
+      return "jv-container " + "jv-"+this.theme + (this.boxed ? " boxed" : "");
     },
     copyText() {
       const { copyText, copiedText, timeout, align } = this.copyable;
@@ -128,6 +129,9 @@ export default {
           this.expandableCode = false;
         }
       });
+    },
+    keyClick(keyName) {
+      this.$emit("onKeyClick", keyName);
     },
     onCopied(copyEvent) {
       if (this.copied) {
@@ -188,8 +192,8 @@ export default {
   user-select: none;
 }
 .jv-container.jv-dark .jv-ellipsis {
-  color: #999;
-  background-color: #eee;
+  color: #f8f8f8;
+  background-color: #2c3e50;
   display: inline-block;
   line-height: 0.9;
   font-size: 0.9em;

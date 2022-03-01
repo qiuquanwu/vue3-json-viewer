@@ -10,8 +10,8 @@ function _typeof(obj) {
   }, _typeof(obj);
 }
 
-var REG_LINK = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
-var script$9 = {
+var REG_LINK$1 = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+var script$a = {
     name: 'JsonString',
     props: {
         jsonValue: {
@@ -37,7 +37,7 @@ var script$9 = {
     },
     render: function render() {
         var value = this.jsonValue;
-        var islink = REG_LINK.test(value);
+        var islink = REG_LINK$1.test(value);
         var domItem;
         if (!this.expand) {
             domItem = {
@@ -77,9 +77,9 @@ var script$9 = {
     }
 };
 
-script$9.__file = "src/Components/types/json-string.vue";
+script$a.__file = "src/Components/types/json-string.vue";
 
-var script$8 = {
+var script$9 = {
     name: 'JsonUndefined',
     functional: true,
     props: {
@@ -99,9 +99,9 @@ var script$8 = {
     }
 };
 
-script$8.__file = "src/Components/types/json-undefined.vue";
+script$9.__file = "src/Components/types/json-undefined.vue";
 
-var script$7 = {
+var script$8 = {
     name: 'JsonNumber',
     functional: true,
     props: {
@@ -124,9 +124,9 @@ var script$7 = {
     }
 };
 
-script$7.__file = "src/Components/types/json-number.vue";
+script$8.__file = "src/Components/types/json-number.vue";
 
-var script$6 = {
+var script$7 = {
     name: 'JsonBoolean',
     functional: true,
     props: { jsonValue: Boolean },
@@ -141,9 +141,9 @@ var script$6 = {
     }
 };
 
-script$6.__file = "src/Components/types/json-boolean.vue";
+script$7.__file = "src/Components/types/json-boolean.vue";
 
-var script$5 = {
+var script$6 = {
     name: 'JsonObject',
     props: {
         jsonValue: {
@@ -261,9 +261,9 @@ var script$5 = {
     }
 };
 
-script$5.__file = "src/Components/types/json-object.vue";
+script$6.__file = "src/Components/types/json-object.vue";
 
-var script$4 = {
+var script$5 = {
     name: 'JsonArray',
     props: {
         jsonValue: {
@@ -369,9 +369,9 @@ var script$4 = {
     }
 };
 
-script$4.__file = "src/Components/types/json-array.vue";
+script$5.__file = "src/Components/types/json-array.vue";
 
-var script$3 = {
+var script$4 = {
     name: 'JsonFunction',
     functional: true,
     props: {
@@ -392,9 +392,9 @@ var script$3 = {
     }
 };
 
-script$3.__file = "src/Components/types/json-function.vue";
+script$4.__file = "src/Components/types/json-function.vue";
 
-var script$2 = {
+var script$3 = {
     name: 'JsonDate',
     inject: ['timeformat'],
     functional: true,
@@ -417,11 +417,83 @@ var script$2 = {
     }
 };
 
-script$2.__file = "src/Components/types/json-date.vue";
+script$3.__file = "src/Components/types/json-date.vue";
+
+var REG_LINK = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+var script$2 = {
+    name: 'JsonString',
+    props: {
+        jsonValue: {
+            type: RegExp,
+            required: true
+        }
+    },
+    data: function data() {
+        return {
+            expand: true,
+            canExtend: false
+        };
+    },
+    mounted: function mounted() {
+        if (this.$refs.itemRef.offsetHeight > this.$refs.holderRef.offsetHeight) {
+            this.canExtend = true;
+        }
+    },
+    methods: {
+        toggle: function toggle() {
+            this.expand = !this.expand;
+        }
+    },
+    render: function render() {
+        var value = this.jsonValue;
+        var islink = REG_LINK.test(value);
+        var domItem;
+        if (!this.expand) {
+            domItem = {
+                'class': { 'jv-ellipsis': true },
+                onClick: this.toggle,
+                innerText: '...'
+            };
+        } else {
+            domItem = {
+                'class': {
+                    'jv-item': true,
+                    'jv-string': true
+                },
+                ref: 'itemRef'
+            };
+            if (islink) {
+                value = '<a href="'.concat(value, '" target="_blank" class="jv-link">').concat(value, '</a>');
+                domItem.innerHTML = ''.concat(value.toString());
+            } else {
+                domItem.innerText = ''.concat(value.toString());
+            }
+        }
+        return h('span', {}, [
+            this.canExtend && h('span', {
+                'class': {
+                    'jv-toggle': true,
+                    open: this.expand
+                },
+                onClick: this.toggle
+            }),
+            h('span', {
+                'class': { 'jv-holder-node': true },
+                ref: 'holderRef'
+            }),
+            h('span', domItem)
+        ]);
+    }
+};
+
+script$2.__file = "src/Components/types/json-regexp.vue";
 
 var script$1 = {
     name: 'JsonBox',
-    inject: ['expandDepth'],
+    inject: [
+        'expandDepth',
+        'keyClick'
+    ],
     props: {
         value: {
             type: [
@@ -469,21 +541,24 @@ var script$1 = {
         var elements = [];
         var dataType;
         if (this.value === null || this.value === undefined) {
-            dataType = script$8;
-        } else if (Array.isArray(this.value)) {
-            dataType = script$4;
-        } else if (Object.prototype.toString.call(this.value) === '[object Date]') {
-            dataType = script$2;
-        } else if (_typeof(this.value) === 'object') {
-            dataType = script$5;
-        } else if (typeof this.value === 'number') {
-            dataType = script$7;
-        } else if (typeof this.value === 'string') {
             dataType = script$9;
-        } else if (typeof this.value === 'boolean') {
-            dataType = script$6;
-        } else if (typeof this.value === 'function') {
+        } else if (Array.isArray(this.value)) {
+            dataType = script$5;
+        } else if (Object.prototype.toString.call(this.value) === '[object Date]') {
             dataType = script$3;
+        } else if (_typeof(this.value) === 'object') {
+            dataType = script$6;
+        } else if (typeof this.value === 'number') {
+            dataType = script$8;
+        } else if (typeof this.value === 'string') {
+            dataType = script$a;
+        } else if (typeof this.value === 'boolean') {
+            dataType = script$7;
+        } else if (typeof this.value === 'function') {
+            dataType = script$4;
+        }
+        if (this.value.constructor === RegExp) {
+            dataType = script$2;
         }
         var complex = this.keyName && this.value && (Array.isArray(this.value) || _typeof(this.value) === 'object' && Object.prototype.toString.call(this.value) !== '[object Date]');
         if (!this.previewMode && complex) {
@@ -498,6 +573,9 @@ var script$1 = {
         if (this.keyName) {
             elements.push(h('span', {
                 'class': { 'jv-key': true },
+                onClick: function onClick() {
+                    _this.keyClick(_this.keyName);
+                },
                 innerText: ''.concat(this.keyName, ':')
             }));
         }
@@ -517,7 +595,7 @@ var script$1 = {
             'class': {
                 'jv-node': true,
                 'jv-key-node': Boolean(this.keyName) && !complex,
-                'toggle': !this.previewMode && complex
+                toggle: !this.previewMode && complex
             }
         }, elements);
     }
@@ -1156,7 +1234,7 @@ var script = {
         },
         theme: {
             type: String,
-            'default': 'jv-light'
+            'default': 'light'
         },
         timeformat: {
             type: Function,
@@ -1172,7 +1250,8 @@ var script = {
     provide: function provide() {
         return {
             expandDepth: this.expandDepth,
-            timeformat: this.timeformat
+            timeformat: this.timeformat,
+            keyClick: this.keyClick
         };
     },
     data: function data() {
@@ -1182,10 +1261,10 @@ var script = {
             expandCode: this.expanded
         };
     },
+    emits: ['onKeyClick'],
     computed: {
         jvClass: function jvClass() {
-            console.log('theme', this.$props);
-            return 'jv-container ' + this.theme + (this.boxed ? ' boxed' : '');
+            return 'jv-container ' + 'jv-' + this.theme + (this.boxed ? ' boxed' : '');
         },
         copyText: function copyText() {
             var _this$copyable = this.copyable, copyText = _this$copyable.copyText, copiedText = _this$copyable.copiedText, timeout = _this$copyable.timeout, align = _this$copyable.align;
@@ -1235,6 +1314,9 @@ var script = {
                     _this2.expandableCode = false;
                 }
             });
+        },
+        keyClick: function keyClick(keyName) {
+            this.$emit('onKeyClick', keyName);
         },
         onCopied: function onCopied(copyEvent) {
             var _this3 = this;

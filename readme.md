@@ -20,6 +20,13 @@ Then install `vue3-json-viewer`
 $ npm install vue3-json-viewer --save
 ```
 
+## RecentUpdate
+- dark theme support
+- Add click event for keyNode
+- Support RegExp types
+
+## Doc
+> [document](https://vjv-doc-qiuquanwu.vercel.app/)
 ## Usage
 
 main.js

@@ -17,7 +17,11 @@ $ npm install clipboard --save
 ```
 $ npm install vue3-json-viewer --save
 ```
-
+## 近期更新
+- 暗夜主题支持
+- 添加key节点点击事件
+- 支持正则表达式类型
+  
 ## 使用
 
 main.js
