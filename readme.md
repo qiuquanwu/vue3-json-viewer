@@ -47,9 +47,9 @@ App.vue
 ``` html
 <template>
   <div class="box">
-    <h4>普通</h4>
+    <h4>Light</h4>
     <JsonViewer :value="jsonData" copyable boxed sort theme="light"  @onKeyClick="keyClick"/>
-    <h4>暗黑</h4>
+    <h4>Dark</h4>
     <JsonViewer :value="jsonData" copyable boxed sort theme="dark"  @onKeyClick="keyClick"/>
   </div>
 </template>
@@ -60,9 +60,9 @@ import {JsonViewer} from "vue3-json-viewer"
 import "vue3-json-viewer/dist/index.css";
 import { reactive, ref } from "vue";
 let obj = {
-  name: "qiu",//字符串
-  age: 18,//数组
-  isMan:false,//布尔值
+  name: "qiu",//string
+  age: 18,//Array
+  isMan:false,//boolean
   date:new Date(),
   fn:()=>{},
   arr:[1,2,5],
@@ -70,7 +70,7 @@ let obj = {
 };
 const jsonData = reactive(obj);
 const keyClick = (keyName)=>{
-  console.log(keyName,"被点击了")
+  console.log(keyName,"it was click")
 }
 </script>
 
