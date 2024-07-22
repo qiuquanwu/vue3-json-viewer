@@ -8,7 +8,7 @@
       </span>
     </div>
     <div class="jv-code" :class="{ open: expandCode, boxed }">
-      <json-box ref="jsonBox" :value="value" :sort="sort" :preview-mode="previewMode" />
+      <json-box ref="jsonBox" :value="parseValue" :sort="sort" :preview-mode="previewMode" />
     </div>
     <div v-if="expandableCode && boxed" class="jv-more" @click="toggleExpandCode">
       <span class="jv-toggle" :class="{ open: !!expandCode }" />
@@ -63,6 +63,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    parse: {
+      type: Boolean,
+      default: false,
+    }
   },
   provide() {
     return {
@@ -93,6 +97,16 @@ export default {
         align,
       };
     },
+    parseValue() {
+      if (!this.parse || typeof this.value !== 'string') {
+        return this.value;
+      }
+      try {
+        return JSON.parse(this.value);
+      } catch {
+        return this.value;
+      }
+    }
   },
   watch: {
     value() {

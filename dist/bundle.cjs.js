@@ -1249,6 +1249,10 @@ var script = {
         previewMode: {
             type: Boolean,
             'default': false
+        },
+        parse: {
+            type: Boolean,
+            'default': false
         }
     },
     provide: function provide() {
@@ -1278,6 +1282,16 @@ var script = {
                 timeout: timeout || 2000,
                 align: align
             };
+        },
+        parseValue: function parseValue() {
+            if (!this.parse || typeof this.value !== 'string') {
+                return this.value;
+            }
+            try {
+                return JSON.parse(this.value);
+            } catch (_unused) {
+                return this.value;
+            }
         }
     },
     watch: {
@@ -1364,7 +1378,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             ])
         }, [vue.createVNode(_component_json_box, {
                 ref: 'jsonBox',
-                value: $props.value,
+                value: $options.parseValue,
                 sort: $props.sort,
                 'preview-mode': $props.previewMode
             }, null, 8, [
