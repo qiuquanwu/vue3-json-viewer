@@ -4,14 +4,14 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 var vue = require('vue');
 
-function _typeof(obj) {
+function _typeof(o) {
   "@babel/helpers - typeof";
 
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, _typeof(o);
 }
 
 var REG_LINK$1 = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
@@ -661,15 +661,27 @@ var clipboard = {exports: {}};
                         fakeElement.value = value;
                         return fakeElement;
                     }
+                    var fakeCopyAction = function fakeCopyAction(value, options) {
+                        var fakeElement = createFakeElement(value);
+                        options.container.appendChild(fakeElement);
+                        var selectedText = select_default()(fakeElement);
+                        command('copy');
+                        fakeElement.remove();
+                        return selectedText;
+                    };
                     var ClipboardActionCopy = function ClipboardActionCopy(target) {
                         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { container: document.body };
                         var selectedText = '';
                         if (typeof target === 'string') {
-                            var fakeElement = createFakeElement(target);
-                            options.container.appendChild(fakeElement);
-                            selectedText = select_default()(fakeElement);
-                            command('copy');
-                            fakeElement.remove();
+                            selectedText = fakeCopyAction(target, options);
+                        } else if (target instanceof HTMLInputElement && ![
+                                'text',
+                                'search',
+                                'url',
+                                'tel',
+                                'password'
+                            ].includes(target === null || target === void 0 ? void 0 : target.type)) {
+                            selectedText = fakeCopyAction(target.value, options);
                         } else {
                             selectedText = select_default()(target);
                             command('copy');
@@ -875,7 +887,6 @@ var clipboard = {exports: {}};
                                             if (trigger) {
                                                 trigger.focus();
                                             }
-                                            document.activeElement.blur();
                                             window.getSelection().removeAllRanges();
                                         }
                                     });

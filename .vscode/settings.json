@@ -9,7 +9,7 @@
   //   "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
   "editor.fontLigatures": true,
   "editor.fontWeight": "500",
-  "workbench.colorTheme": "1984 - Unbolded",
+  "workbench.colorTheme": "Default Dark Modern",
   "window.autoDetectColorScheme": false,
   "editor.formatOnSave": true,
   "vue3snippets.enable-compile-vue-file-on-did-save-code": false
