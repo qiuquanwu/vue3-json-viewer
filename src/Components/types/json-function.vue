@@ -1,25 +1,21 @@
-<script>
-import {h} from "vue"
-export default {
-  name: 'JsonFunction',
-  functional: true,
-  props: {
-    jsonValue: {
-      type: Function,
-      required: true
-    }
-  },
-  render () {
-    return h('span', {
-      class: {
-        'jv-item': true,
-        'jv-function': true,
-      },
-      attrs: {
-        title: this.jsonValue.toString()
-      },
-      innerHTML: '&lt;function&gt;'
-    })
+<template>
+  <span :class="['jv-item', 'jv-function']" :title="jsonValue.toString()">
+    &lt;function&gt;
+  </span>
+</template>
+
+<script lang="ts" setup>
+import { PropType } from 'vue';
+
+/**
+ * JsonFunction component renders a placeholder for JavaScript Function objects.
+ * It displays "<function>" and shows the function's string representation in the title attribute.
+ */
+defineProps({
+  /** The Function object to represent. */
+  jsonValue: {
+    type: Function as PropType<Function>,
+    required: true
   }
-}
+});
 </script>

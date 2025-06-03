@@ -1,19 +1,20 @@
-<script>
-import {h} from "vue"
-export default {
-  name: 'JsonBoolean',
-  functional: true,
-  props: {
-    jsonValue: Boolean
-  },
-  render () {
-    return h('span', {
-      class: {
-        'jv-item': true,
-        'jv-boolean': true,
-      },
-      innerText: this.jsonValue.toString()
-    })
+<template>
+  <span :class="['jv-item', 'jv-boolean']">
+    {{ jsonValue.toString() }}
+  </span>
+</template>
+
+<script lang="ts" setup>
+import { PropType } from 'vue';
+
+/**
+ * JsonBoolean component renders a boolean JSON value.
+ */
+defineProps({
+  /** The boolean value to display. */
+  jsonValue: {
+    type: Boolean as PropType<boolean>,
+    required: true
   }
-}
+});
 </script>

@@ -1,26 +1,27 @@
-<script>
-import {h} from "vue"
-export default {
-  name: 'JsonNumber',
-  functional: true,
-  props: {
-    jsonValue: {
-      type: Number,
-      required: true
-    }
-  },
-  render () {
-    const isInteger = Number.isInteger(this.jsonValue)
+<template>
+  <span :class="['jv-item', 'jv-number', isInteger ? 'jv-number-integer' : 'jv-number-float']">
+    {{ jsonValue.toString() }}
+  </span>
+</template>
 
-    return h('span', {
-      class: {
-        'jv-item': true,
-        'jv-number': true,
-        'jv-number-integer': isInteger,
-        'jv-number-float': !isInteger,
-      },
-      innerText: this.jsonValue.toString()
-    })
+<script lang="ts" setup>
+import { computed, PropType } from 'vue';
+
+/**
+ * JsonNumber component renders a JSON number value.
+ * It distinguishes between integers and floating-point numbers for styling.
+ */
+const props = defineProps({
+  /** The number value to display. */
+  jsonValue: {
+    type: Number as PropType<number>,
+    required: true
   }
-}
+});
+
+/**
+ * Computed property that checks if the `jsonValue` is an integer.
+ * Used for applying specific CSS classes.
+ */
+const isInteger = computed(() => Number.isInteger(props.jsonValue));
 </script>
