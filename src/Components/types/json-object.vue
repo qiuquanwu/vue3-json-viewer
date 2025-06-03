@@ -111,12 +111,12 @@ export default defineComponent({
     return () => {
       const elements: VNode[] = [];
       // Add toggle button if not in preview mode and not a top-level unnamed object.
-      if (!props.previewMode && !props.keyName) {
-        elements.push(h('span', {
-          class: { 'jv-toggle': true, 'open': !!props.expand }, // `!!` ensures boolean
-          onClick: toggle
-        }));
-      }
+      // if (!props.previewMode && !props.keyName) {
+      //   elements.push(h('span', {
+      //     class: { 'jv-toggle': true, 'open': !!props.expand }, // `!!` ensures boolean
+      //     onClick: toggle
+      //   }));
+      // }
 
       elements.push(h('span', { class: ['jv-item', 'jv-object'] }, '{'));
 

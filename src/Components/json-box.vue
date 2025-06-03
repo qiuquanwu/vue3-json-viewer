@@ -49,7 +49,7 @@ export default defineComponent({
     /** Injected from JsonViewer: The maximum depth to auto-expand. */
     const expandDepth = inject<number>("expandDepth", Infinity);
     /** Injected from JsonViewer: Function to call when a key is clicked. */
-    const keyClick = inject<KeyClickFunction>("keyClick", () => {});
+    const keyClick = inject<KeyClickFunction>("keyClick", () => { });
 
     /** Reactive state for whether this node is expanded. */
     const expand = ref(true);
@@ -119,8 +119,8 @@ export default defineComponent({
         props.value &&
         (Array.isArray(props.value) ||
           (typeof props.value === "object" &&
-           !(props.value instanceof Date) && // Exclude Date
-           !(props.value instanceof RegExp)   // Exclude RegExp
+            !(props.value instanceof Date) && // Exclude Date
+            !(props.value instanceof RegExp)   // Exclude RegExp
           ));
 
       // Add toggle button for complex types if not in preview mode.

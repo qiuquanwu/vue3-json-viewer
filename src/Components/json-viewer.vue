@@ -34,7 +34,7 @@ interface JsonBoxComponent extends InstanceType<typeof JsonBox> {
   $el: HTMLElement;
 }
 // Define the type for the $refs.clip
-interface ClipElement extends HTMLElement {}
+interface ClipElement extends HTMLElement { }
 
 /**
  * Props for the JsonViewer component.
