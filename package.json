@@ -1,6 +1,6 @@
 {
   "name": "vue3-json-viewer",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "vuejs展示json的组件,适配vue3",
   "main": "dist/bundle.cjs.js",
   "module": "dist/bundle.esm.js",
