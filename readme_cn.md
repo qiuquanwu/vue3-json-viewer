@@ -31,7 +31,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import JsonViewer from "vue3-json-viewer"
 // if you used v1.0.5 or latster ,you should add import "vue3-json-viewer/dist/index.css"
-import "vue3-json-viewer/dist/index.css"
+import "vue3-json-viewer/dist/vue3-json-viewer.css"
 const app = createApp(App)
 //全局引入
 app.use(JsonViewer)

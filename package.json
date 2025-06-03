@@ -29,6 +29,7 @@
     "url": "git+https://github.com/qiuquanwu/vue3-json-viewer"
   },
   "devDependencies": {
+    "@types/node": "^22.15.29",
     "@vitejs/plugin-vue": "^5.2.4",
     "clean-css": "^5.2.4",
     "stylus": "^0.56.0",
