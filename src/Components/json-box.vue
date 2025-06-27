@@ -124,7 +124,7 @@ export default defineComponent({
           ));
 
       // Add toggle button for complex types if not in preview mode.
-      if (!props.previewMode && isComplex) {
+      if (!props.previewMode && isComplex && !(props.value instanceof RegExp)) {
         elements.push(
           h("span", {
             class: {
