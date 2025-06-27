@@ -1,6 +1,6 @@
 {
   "name": "vue3-json-viewer",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "vuejs展示json的组件,适配vue3",
   "main": "dist/vue3-json-viewer.js",
   "module": "dist/vue3-json-viewer.mjs",
